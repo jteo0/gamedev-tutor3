@@ -1,13 +1,83 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8flt600cpdfo"]
+[gd_scene load_steps=11 format=3 uid="uid://b8flt600cpdfo"]
 
-[ext_resource type="Texture2D" uid="uid://b83s10q5xdw4w" path="res://assets/playerShip1_blue.png" id="1_c7vol"]
+[ext_resource type="Texture2D" uid="uid://wd5e66o8xb3j" path="res://assets/kenney_platformercharacters/PNG/Player/Poses/player_fall.png" id="1_b2x7j"]
+[ext_resource type="Texture2D" uid="uid://d1f7n4pxd6c1r" path="res://assets/kenney_platformercharacters/PNG/Player/Poses/player_cheer1.png" id="1_cbps6"]
+[ext_resource type="Texture2D" uid="uid://dabdx15lfberv" path="res://assets/kenney_platformercharacters/PNG/Player/Poses/player_stand.png" id="1_uynkq"]
+[ext_resource type="Texture2D" uid="uid://2ji7p3i8cf5k" path="res://assets/kenney_platformercharacters/PNG/Player/Poses/player_cheer2.png" id="2_td8mm"]
+[ext_resource type="Texture2D" uid="uid://4llywo7pd8pp" path="res://assets/kenney_platformercharacters/PNG/Player/Poses/player_jump.png" id="2_wg0mu"]
+[ext_resource type="Texture2D" uid="uid://frwcqhlecb58" path="res://assets/kenney_platformercharacters/PNG/Player/Poses/player_duck.png" id="3_0ef6w"]
+[ext_resource type="Texture2D" uid="uid://cpv0qxx81v0m3" path="res://assets/kenney_platformercharacters/PNG/Player/Poses/player_walk1.png" id="4_o47nj"]
+[ext_resource type="Texture2D" uid="uid://c0oji5em2e0n2" path="res://assets/kenney_platformercharacters/PNG/Player/Poses/player_walk2.png" id="5_btkjn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6hoof"]
+size = Vector2(60, 78)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bek3o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_cbps6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_td8mm")
+}],
+"loop": true,
+"name": &"cheer",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_0ef6w")
+}],
+"loop": true,
+"name": &"duck",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_b2x7j")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_uynkq")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_wg0mu")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_o47nj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_btkjn")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
 
 [node name="Player" type="CharacterBody2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_c7vol")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 16)
 shape = SubResource("RectangleShape2D_6hoof")
+
+[node name="AnimatedPlayer" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+sprite_frames = SubResource("SpriteFrames_bek3o")
+animation = &"cheer"
+frame = 1
+frame_progress = 0.0215281

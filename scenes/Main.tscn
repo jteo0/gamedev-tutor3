@@ -1,8 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://dsyfep1odrxje"]
+[gd_scene load_steps=10 format=3 uid="uid://dsyfep1odrxje"]
 
 [ext_resource type="PackedScene" path="res://Scenes/Ground.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://b8flt600cpdfo" path="res://scenes/Player.tscn" id="2_4pqqo"]
 [ext_resource type="Script" path="res://scenes/Player.gd" id="3_jxm2a"]
+[ext_resource type="Texture2D" uid="uid://jtx7qdh88sec" path="res://assets/background/Clouds 5/1.png" id="4_18fn4"]
+[ext_resource type="Texture2D" uid="uid://bv63qytujtvyc" path="res://assets/background/Clouds 5/2.png" id="5_q2i5i"]
+[ext_resource type="Texture2D" uid="uid://cska5byvr7d3a" path="res://assets/background/Clouds 5/3.png" id="6_fw77w"]
+[ext_resource type="Texture2D" uid="uid://c8tkbxof2t3xj" path="res://assets/background/Clouds 5/4.png" id="7_plfln"]
+[ext_resource type="Texture2D" uid="uid://clvrgynlr2cvo" path="res://assets/background/Clouds 5/5.png" id="8_sawds"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hheob"]
+size = Vector2(4805, 27)
 
 [node name="Root" type="Node2D"]
 
@@ -18,3 +26,46 @@ position = Vector2(225.95, 294.562)
 [node name="Player" parent="." instance=ExtResource("2_4pqqo")]
 position = Vector2(200, 50)
 script = ExtResource("3_jxm2a")
+
+[node name="CloudBackground" type="ParallaxBackground" parent="."]
+offset = Vector2(576, 324)
+scale = Vector2(2, 2)
+transform = Transform2D(2, 0, 0, 2, 576, 324)
+
+[node name="Layer1" type="ParallaxLayer" parent="CloudBackground"]
+motion_scale = Vector2(0.2, 0.2)
+
+[node name="Sprite2D1" type="Sprite2D" parent="CloudBackground/Layer1"]
+texture = ExtResource("4_18fn4")
+
+[node name="Layer2" type="ParallaxLayer" parent="CloudBackground"]
+motion_scale = Vector2(0.4, 0.4)
+
+[node name="Sprite2D2" type="Sprite2D" parent="CloudBackground/Layer2"]
+texture = ExtResource("5_q2i5i")
+
+[node name="Layer3" type="ParallaxLayer" parent="CloudBackground"]
+motion_scale = Vector2(0.6, 0.6)
+
+[node name="Sprite2D3" type="Sprite2D" parent="CloudBackground/Layer3"]
+texture = ExtResource("6_fw77w")
+
+[node name="Layer4" type="ParallaxLayer" parent="CloudBackground"]
+motion_scale = Vector2(0.8, 0.8)
+
+[node name="Sprite2D4" type="Sprite2D" parent="CloudBackground/Layer4"]
+texture = ExtResource("7_plfln")
+
+[node name="Layer5" type="ParallaxLayer" parent="CloudBackground"]
+
+[node name="Sprite2D5" type="Sprite2D" parent="CloudBackground/Layer5"]
+texture = ExtResource("8_sawds")
+
+[node name="OffscreenLimit" type="Area2D" parent="."]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OffscreenLimit"]
+position = Vector2(883.5, 773.5)
+shape = SubResource("RectangleShape2D_hheob")
+
+[connection signal="body_entered" from="OffscreenLimit" to="Player" method="_on_offscreen_limit_body_entered"]

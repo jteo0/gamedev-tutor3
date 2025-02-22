@@ -81,3 +81,7 @@ func _physics_process(delta):
 		_animated_player.play("cheer")
 
 	move_and_slide()
+
+func _on_offscreen_limit_body_entered(body: CharacterBody2D) -> void:
+	position.x = 200
+	position.y = 50

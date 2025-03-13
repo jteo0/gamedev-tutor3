@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dsyfep1odrxje"]
+[gd_scene load_steps=11 format=3 uid="uid://dsyfep1odrxje"]
 
 [ext_resource type="PackedScene" path="res://Scenes/Ground.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://b8flt600cpdfo" path="res://scenes/Player.tscn" id="2_4pqqo"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cska5byvr7d3a" path="res://assets/background/Clouds 5/3.png" id="6_fw77w"]
 [ext_resource type="Texture2D" uid="uid://c8tkbxof2t3xj" path="res://assets/background/Clouds 5/4.png" id="7_plfln"]
 [ext_resource type="Texture2D" uid="uid://clvrgynlr2cvo" path="res://assets/background/Clouds 5/5.png" id="8_sawds"]
+[ext_resource type="AudioStream" uid="uid://cgy6jwxdi4jn6" path="res://assets/audio/loop_ogg.ogg" id="9_oxc2k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hheob"]
 size = Vector2(4805, 27)
@@ -67,5 +68,10 @@ unique_name_in_owner = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OffscreenLimit"]
 position = Vector2(883.5, 773.5)
 shape = SubResource("RectangleShape2D_hheob")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_oxc2k")
+volume_db = 24.0
+autoplay = true
 
 [connection signal="body_entered" from="OffscreenLimit" to="Player" method="_on_offscreen_limit_body_entered"]

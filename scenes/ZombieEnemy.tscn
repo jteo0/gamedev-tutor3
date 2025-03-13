@@ -1,0 +1,75 @@
+[gd_scene load_steps=11 format=3 uid="uid://g2ydkb5v107f"]
+
+[ext_resource type="Texture2D" uid="uid://ci1msmjvc5x1n" path="res://assets/kenney_platformercharacters/PNG/Zombie/Poses/zombie_hurt.png" id="1_g4tbk"]
+[ext_resource type="Texture2D" uid="uid://c6ab5usovtwvg" path="res://assets/kenney_platformercharacters/PNG/Zombie/Poses/zombie_jump.png" id="2_l3h43"]
+[ext_resource type="Texture2D" uid="uid://j2wrs40clo4m" path="res://assets/kenney_platformercharacters/PNG/Zombie/Poses/zombie_idle.png" id="3_6k1en"]
+[ext_resource type="Texture2D" uid="uid://c6fnsckcvxh45" path="res://assets/kenney_platformercharacters/PNG/Zombie/Poses/zombie_kick.png" id="4_th1yb"]
+[ext_resource type="Texture2D" uid="uid://dv1reihmdtpyu" path="res://assets/kenney_platformercharacters/PNG/Zombie/Poses/zombie_action1.png" id="5_6dfeg"]
+[ext_resource type="Texture2D" uid="uid://vbe0mk82vmx3" path="res://assets/kenney_platformercharacters/PNG/Zombie/Poses/zombie_action2.png" id="6_cep8i"]
+[ext_resource type="Texture2D" uid="uid://bvrk5ia7qa012" path="res://assets/kenney_platformercharacters/PNG/Zombie/Poses/zombie_walk1.png" id="7_x0j46"]
+[ext_resource type="Texture2D" uid="uid://jnt42t5uwigs" path="res://assets/kenney_platformercharacters/PNG/Zombie/Poses/zombie_walk2.png" id="8_wx6xu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_04p6i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_g4tbk")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_l3h43")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_6k1en")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_th1yb")
+}],
+"loop": true,
+"name": &"kick",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_6dfeg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_cep8i")
+}],
+"loop": true,
+"name": &"punch",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_x0j46")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_wx6xu")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y4l36"]
+size = Vector2(53, 77)
+
+[node name="ZombieEnemy" type="RigidBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_04p6i")
+animation = &"walk"
+
+[node name="CollisionShapeWalk" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 14.5)
+shape = SubResource("RectangleShape2D_y4l36")

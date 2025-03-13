@@ -11,6 +11,7 @@ var left_dash_timer = 0
 var player_direction = true
 var is_dashing_right = false
 var is_dashing_left = false
+var is_attacking = false
 
 var jump_count = 0
 
@@ -29,6 +30,13 @@ func _process(delta: float):
 
 func _physics_process(delta):
 	velocity.y += delta * gravity
+	
+	if Input.is_action_just_pressed("v_key"):
+		_animated_player.play("punch")
+		is_attacking = true
+	
+	if is_attacking:
+		_animated_player.play("punch")
 
 	if is_on_floor():
 		jump_count = 0

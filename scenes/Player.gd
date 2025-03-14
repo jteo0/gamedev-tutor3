@@ -12,6 +12,7 @@ var player_direction = true
 var is_dashing_right = false
 var is_dashing_left = false
 var is_attacking = false
+var keep_flip = false
 
 var jump_count = 0
 
@@ -32,12 +33,15 @@ func _physics_process(delta):
 	velocity.y += delta * gravity
 	
 	if Input.is_action_just_pressed("v_key"):
-		_animated_player.play("punch")
 		is_attacking = true
-	
-	if is_attacking:
+		$PunchAudio.play()
 		_animated_player.play("punch")
-
+		$PunchHitbox.monitoring = true 
+	
+	if Input.is_action_just_released("v_key"):
+		is_attacking = false
+		$PunchHitbox.monitoring = false
+	
 	if is_on_floor():
 		jump_count = 0
 
@@ -48,7 +52,7 @@ func _physics_process(delta):
 		if is_on_floor():
 			_animated_player.play("duck")
 		elif not is_on_floor():
-			velocity.y = delta * gravity * 5
+			velocity.y = delta * gravity * 30
 	
 	if Input.is_action_just_pressed('move_up'):
 		_animated_player.play("jump")
@@ -69,6 +73,7 @@ func _physics_process(delta):
 			velocity.x = -walk_speed * 2
 		else:
 			velocity.x = -walk_speed
+		
 	elif Input.is_action_pressed("move_right"):
 		if not player_direction:
 			scale.x *= -1
@@ -91,5 +96,10 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _on_offscreen_limit_body_entered(body: CharacterBody2D) -> void:
-	position.x = 200
-	position.y = 50
+	if body.name == "Player":
+		position.x = 200
+		position.y = 50
+
+func _on_punch_hitbox_body_entered(body) -> void:
+	if body.is_in_group("enemy") and is_attacking:
+		SignalBus.punch_hit.emit(body)

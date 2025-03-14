@@ -1,3 +1,4 @@
+# Tutorial 3
 - Double Jump: This is done by keeping count of how many jumps have been done mid air:<br>
 <code>if is_on_floor():
 		jump_count = 0</code>
@@ -30,3 +31,14 @@ func _on_offscreen_limit_body_entered(body: CharacterBody2D) -> void:
 	position.x = 200
 	position.y = 50
 </code>
+
+# Tutorial 5
+
+References:<br>
+- https://www.reddit.com/r/godot/comments/qry42j/comment/jirhcgp/?context=3<br>
+- https://forum.godotengine.org/t/emitting-and-receiving-signals-in-between-scenes/66998/3<br>
+
+Sounds from:
+- https://quicksounds.com/sound/110/oof-roblox : roblox_oof.ogg<br>
+- Swinging a drum stick : Swing.ogg<br>
+- Whistling : loop_ogg.ogg

@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://dsyfep1odrxje"]
+[gd_scene load_steps=12 format=3 uid="uid://dsyfep1odrxje"]
 
 [ext_resource type="PackedScene" path="res://Scenes/Ground.tscn" id="1"]
+[ext_resource type="Script" path="res://scenes/Spawner.gd" id="1_hvkjf"]
 [ext_resource type="PackedScene" uid="uid://b8flt600cpdfo" path="res://scenes/Player.tscn" id="2_4pqqo"]
-[ext_resource type="Script" path="res://scenes/Player.gd" id="3_jxm2a"]
+[ext_resource type="PackedScene" uid="uid://g2ydkb5v107f" path="res://scenes/ZombieEnemy.tscn" id="2_m264r"]
 [ext_resource type="Texture2D" uid="uid://jtx7qdh88sec" path="res://assets/background/Clouds 5/1.png" id="4_18fn4"]
 [ext_resource type="Texture2D" uid="uid://bv63qytujtvyc" path="res://assets/background/Clouds 5/2.png" id="5_q2i5i"]
 [ext_resource type="Texture2D" uid="uid://cska5byvr7d3a" path="res://assets/background/Clouds 5/3.png" id="6_fw77w"]
@@ -14,6 +15,12 @@
 size = Vector2(4805, 27)
 
 [node name="Root" type="Node2D"]
+script = ExtResource("1_hvkjf")
+obstacle = ExtResource("2_m264r")
+
+[node name="Player" parent="." instance=ExtResource("2_4pqqo")]
+z_index = -1
+position = Vector2(200, 50)
 
 [node name="Ground" parent="." instance=ExtResource("1")]
 position = Vector2(507.708, 363.86)
@@ -24,43 +31,14 @@ position = Vector2(789.149, 294.054)
 [node name="Ground3" parent="." instance=ExtResource("1")]
 position = Vector2(225.95, 294.562)
 
-[node name="Player" parent="." instance=ExtResource("2_4pqqo")]
-position = Vector2(200, 50)
-script = ExtResource("3_jxm2a")
+[node name="Ground4" parent="." instance=ExtResource("1")]
+position = Vector2(1107.71, 363.86)
 
-[node name="CloudBackground" type="ParallaxBackground" parent="."]
-offset = Vector2(576, 324)
-scale = Vector2(2, 2)
-transform = Transform2D(2, 0, 0, 2, 576, 324)
+[node name="Ground5" parent="." instance=ExtResource("1")]
+position = Vector2(1389.15, 294.054)
 
-[node name="Layer1" type="ParallaxLayer" parent="CloudBackground"]
-motion_scale = Vector2(0.2, 0.2)
-
-[node name="Sprite2D1" type="Sprite2D" parent="CloudBackground/Layer1"]
-texture = ExtResource("4_18fn4")
-
-[node name="Layer2" type="ParallaxLayer" parent="CloudBackground"]
-motion_scale = Vector2(0.4, 0.4)
-
-[node name="Sprite2D2" type="Sprite2D" parent="CloudBackground/Layer2"]
-texture = ExtResource("5_q2i5i")
-
-[node name="Layer3" type="ParallaxLayer" parent="CloudBackground"]
-motion_scale = Vector2(0.6, 0.6)
-
-[node name="Sprite2D3" type="Sprite2D" parent="CloudBackground/Layer3"]
-texture = ExtResource("6_fw77w")
-
-[node name="Layer4" type="ParallaxLayer" parent="CloudBackground"]
-motion_scale = Vector2(0.8, 0.8)
-
-[node name="Sprite2D4" type="Sprite2D" parent="CloudBackground/Layer4"]
-texture = ExtResource("7_plfln")
-
-[node name="Layer5" type="ParallaxLayer" parent="CloudBackground"]
-
-[node name="Sprite2D5" type="Sprite2D" parent="CloudBackground/Layer5"]
-texture = ExtResource("8_sawds")
+[node name="Ground6" parent="." instance=ExtResource("1")]
+position = Vector2(1742, 294)
 
 [node name="OffscreenLimit" type="Area2D" parent="."]
 unique_name_in_owner = true
@@ -71,7 +49,35 @@ shape = SubResource("RectangleShape2D_hheob")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_oxc2k")
-volume_db = 24.0
+volume_db = 6.032
 autoplay = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Background" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(576, 324)
+scale = Vector2(2, 2)
+texture = ExtResource("4_18fn4")
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(576, 326)
+scale = Vector2(2, 2)
+texture = ExtResource("5_q2i5i")
+
+[node name="Sprite2D3" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(576, 326)
+scale = Vector2(2, 2)
+texture = ExtResource("6_fw77w")
+
+[node name="Sprite2D4" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(576, 326)
+scale = Vector2(2, 2)
+texture = ExtResource("7_plfln")
+
+[node name="Sprite2D5" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(576, 326)
+scale = Vector2(2, 2)
+texture = ExtResource("8_sawds")
 
 [connection signal="body_entered" from="OffscreenLimit" to="Player" method="_on_offscreen_limit_body_entered"]
